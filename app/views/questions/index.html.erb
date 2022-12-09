@@ -1,0 +1,24 @@
+<div class="container">
+  <p class="mt text-center mb">
+    <%= link_to "Создать новый вопрос", new_question_path, class: "button button-main" %>
+  </p>
+</div>
+
+<div>
+  <h2 class="title-lg mb container-question text-center">
+    <%= @questions.count %>
+    <%= inclination(@questions.count, "вопрос", "вопроса", "вопросов") %>
+  </h2>
+
+  <% @questions.each do |question| %>
+    <% if question.hidden? %>
+      <div class="container-question mb-sm hide">
+        <%= render question %>
+      </div>
+    <% else %>
+      <div class="container-question mb-sm">
+        <%= render question %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
