@@ -31,6 +31,18 @@ a, button {
   color: #a0a0a0;
 }
 
+.text-red {
+  color: #9D0208;
+}
+
 .text-center {
   text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-with-line-breaks {
+  white-space: pre-line;
 }

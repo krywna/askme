@@ -8,6 +8,15 @@
   text-decoration: none;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .button-main {
   background-color: #9D0208;
+}
+
+.button-yellow {
+  background: #ffba08;
+  color: #000;
 }

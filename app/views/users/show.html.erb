@@ -1,0 +1,23 @@
+<div class="user-box mt-lg">
+  <h2 class="title-lg mt-lg"><%= @user.name %></h2>
+
+  <% if current_user == @user %>
+    <p class="mt mb">
+      <%= link_to fa_icon("pencil"), edit_user_path(@user) %>
+    </p>
+  <% end %>
+
+  <p class="text-bold mt mb-lg"><%= nickname_with_at(@user) %></p>
+</div>
+
+<div class="container">
+  <%= link_to "Спроси меня", new_question_path(user_id: @user.id), class: "button button-yellow" %>
+
+  <p class="mt text-center mb">
+    <%= render "questions/form", question: @question %>
+  </p>
+</div>
+
+<div>
+  <%= render "questions_or_ghost" %>
+</div>
