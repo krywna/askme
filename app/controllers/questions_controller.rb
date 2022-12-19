@@ -4,9 +4,8 @@ class QuestionsController < ApplicationController
 
   def create
     question_params = params.require(:question).permit(:body, :user_id)
-    @question.author = current_user if current_user.present?
-    @question = Question.create(question_params)
-    @user = User.find(params[:question][:user_id])
+    @question = Question.new(question_params)
+    @question.author = current_user
 
     if @question.save
       redirect_to user_path(@question.user), notice: "Вы создали новый вопрос!"
