@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     @question.author = current_user
 
     if @question.save
-      redirect_to user_path(@question.user), notice: "Вы создали новый вопрос!"
+      redirect_to user_path(@question.user.nickname), notice: "Вы создали новый вопрос!"
     else
       flash.now[:alert] = "Вы неправильно заполнили поля формы вопроса!"
       render :new

@@ -13,7 +13,7 @@
     <p>
       <%= l(question.created_at, format: :short) %>
       Вопрос задал
-      <% if question.author == nil %>
+      <% if question.author.nil? %>
         Аноним
       <% else %>
         <%= link_to nickname_with_at(question.author), user_path(question.author.nickname), class: "mr-sm nickname" %>
