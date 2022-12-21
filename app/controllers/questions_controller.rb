@@ -11,7 +11,6 @@ class QuestionsController < ApplicationController
       redirect_to user_path(@question.user), notice: "Вы создали новый вопрос!"
     else
       flash.now[:alert] = "Вы неправильно заполнили поля формы вопроса!"
-
       render :new
     end
   end

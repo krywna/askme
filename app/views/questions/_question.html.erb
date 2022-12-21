@@ -16,11 +16,11 @@
       <% if question.author == nil %>
         Аноним
       <% else %>
-        <%= link_to nickname_with_at(question.author), user_path(question.author), class: "mr-sm nickname" %>
+        <%= link_to nickname_with_at(question.author), user_path(question.author.nickname), class: "mr-sm nickname" %>
       <% end %>
     </p>
   </div>
-  
+
   <% if current_user == question.user %>
     <div class="icon">
       <% if question.answer.present? %>
@@ -33,7 +33,7 @@
 
       <% unless question.hidden? %>
         <%= button_to fa_icon("low-vision"), hide_question_path(question), method: :put, title: "Сделать скрытым", data: { turbo_confirm: "Вы уверены, что хотите скрыть вопрос?" } %>
-      <% end %> 
+      <% end %>
     </div>
   <% end %>
 </div>

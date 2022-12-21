@@ -49,11 +49,11 @@ class UsersController < ApplicationController
   private
 
   def authorize_user
-    redirect_with_alert if current_user != @user
+    redirect_with_alert unless current_user == @user
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by!(nickname: params[:nickname])
   end
 
   def user_params

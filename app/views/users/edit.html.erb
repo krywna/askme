@@ -10,7 +10,7 @@
   <% end %>
 
   <div class="mt">
-    <%= form_with model: @user, data: {turbo: false} do |form| %>
+    <%= form_with model: @user, url: user_path(@user.nickname), data: {turbo: false} do |form| %>
       <p><%= form.label :name, "Ваше имя" %></p>
       <p><%= form.text_field :name, class: "form-text-field" %></p>
 
@@ -27,7 +27,7 @@
 
       <p class="mt"><%= form.label :header_background_color %></p>
       <p><%= form.color_field :color, class: "form-color-field mt" %></p>
-      
+
       <p class="mt-lg mb-lg">
         <%= form.submit "Сохранить", class: "button button-main mt-lg " %>
         <span class="text-sm">или <%= link_to "Вернуться", :back, class: "text-red" %></span>
@@ -35,7 +35,7 @@
     <% end %>
 
     <div class="mt-lg">
-      <%= button_to "Удалить аккаунт", user_path(@user),
+      <%= button_to "Удалить аккаунт", user_path(@user.nickname),
         method: :delete,
         form: {data: {turbo_confirm: "Вы точно хотите удалить свой профиль?"}},
         class: "text-red text-sm" %>
