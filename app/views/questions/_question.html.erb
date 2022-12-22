@@ -1,5 +1,5 @@
 <div class="mb-sm text-with-line-breaks">
-  <%= question.body %>
+  <%= render_with_hashtags(question.body) %>
 </div>
 
 <% if question.answer.present? %>

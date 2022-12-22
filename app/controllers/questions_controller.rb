@@ -52,6 +52,15 @@ class QuestionsController < ApplicationController
     redirect_to user_path(@question.user), notice: "Вы скрыли вопрос!"
   end
 
+  def hashtags
+    tag = Tag.find_by(name: params[:name])
+    if tag.nil?
+      redirect_to root_path, notice: "Такого хэштэга нет!"
+    else
+      @questions = tag.questions
+    end
+  end
+
   private
 
   def ensure_current_user
@@ -61,4 +70,5 @@ class QuestionsController < ApplicationController
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
   end
+
 end
