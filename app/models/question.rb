@@ -5,22 +5,15 @@ class Question < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 280 }
 
-  after_create do
-    question = Question.find_by(id: self.id)
-    hashtags = self.body.scan(/#\w+/)
-    hashtags.uniq.map do |hashtag|
-      tag = Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
-      question.tags << tag
-    end
-  end
+  before_save :set_tags
 
-    before_update do
-    question = Question.find_by(id: self.id)
-    post.tags.clear
-    hashtags = self.body.scan(/#\w+/)
+  def set_tags
+    self.tags.clear
+    hashtags = self.body.scan(/#[\wА-Яа-я\-]+/i)
+    hashtags += self.answer.scan(/#[\wА-Яа-я\-]+/i) if self.answer.present?
     hashtags.map do |hashtag|
       tag = Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
-      question.uniq.tags << tag
+      self.tags << tag
     end
   end
 

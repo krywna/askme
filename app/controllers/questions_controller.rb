@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :answer)
     @question.update(question_params)
 
-    redirect_to user_path(@question.user), notice: "Вы изменили вопрос!"
+    redirect_to user_path(@question.user.nickname), notice: "Вы изменили вопрос!"
   end
 
   def destroy
