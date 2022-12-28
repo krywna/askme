@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
-  has_and_belongs_to_many :tags
+  has_many :question_tags
+  has_many :tags, through: :question_tags
   belongs_to :user
   belongs_to :author, class_name: "User", optional: true
 
