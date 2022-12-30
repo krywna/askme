@@ -11,6 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_22_075907) do
+  create_table "question_tags", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_tags_on_question_id"
+    t.index ["tag_id"], name: "index_question_tags_on_tag_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
@@ -20,15 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_075907) do
     t.text "answer"
     t.integer "author_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
-  end
-
-  create_table "questions_tags", force: :cascade do |t|
-    t.integer "question_id", null: false
-    t.integer "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_questions_tags_on_question_id"
-    t.index ["tag_id"], name: "index_questions_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -49,6 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_075907) do
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
   end
 
-  add_foreign_key "questions_tags", "questions"
-  add_foreign_key "questions_tags", "tags"
+  add_foreign_key "question_tags", "questions"
+  add_foreign_key "question_tags", "tags"
 end
