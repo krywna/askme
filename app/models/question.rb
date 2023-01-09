@@ -7,16 +7,13 @@ class Question < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 280 }
 
-  after_save :set_tags
+  after_commit :set_tags, on: %i[ create update ]
 
   def set_tags
     self.tags.clear
-    hashtags = self.body.scan(/#[\p{L}_\d]+/)
-    hashtags += self.answer.scan(/#[\p{L}_\d]+/) if self.answer.present?
-    hashtags.map do |hashtag|
-      tag = Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
-      self.tags << tag
-    end
+    self.tags =
+      "#{body} #{answer}".downcase.scan(Tag::REGEX).uniq.map do |hashtag|
+        Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
+      end
   end
-
 end
