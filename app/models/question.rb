@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  has_many :question_tags, dependent: :delete_all
+  has_many :question_tags, dependent: :destroy
   has_many :tags, through: :question_tags
 
   belongs_to :user
@@ -7,13 +7,12 @@ class Question < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 280 }
 
-  after_commit :set_tags, on: %i[ create update ]
+  after_save_commit :set_tags
 
   def set_tags
-    self.tags.clear
     self.tags =
       "#{body} #{answer}".downcase.scan(Tag::REGEX).uniq.map do |hashtag|
-        Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
+        Tag.create_or_find_by(name: hashtag.downcase.delete("#"))
       end
   end
 end

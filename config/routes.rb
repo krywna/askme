@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   resource :session, only: %i[new create destroy update]
 
-  resources :users, except: %i[index], param: :nickname
+  resources :users, except: [:index], param: :nickname
 
-  get "/questions/hashtag/:name", to: "questions#hashtags"
+  resources :tags, only: [:show], param: :name
 
 end

@@ -1,4 +1,4 @@
 class QuestionTag < ActiveRecord::Base
-  belongs_to :question, dependent: :destroy
-  belongs_to :tag, dependent: :destroy
+  belongs_to :question
+  belongs_to :tag
 end
