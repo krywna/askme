@@ -36,6 +36,7 @@ class QuestionsController < ApplicationController
   def index
     @question = Question.new
     @questions = Question.order("created_at DESC")
+    @tags = Tag.joins(:questions).map(&:name).uniq.each { |tag| tag.prepend("#") }.join(", ")
   end
 
   def new
