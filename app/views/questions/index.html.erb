@@ -3,9 +3,14 @@
     <%= @questions.count %>
     <%= inclination(@questions.count, "вопрос", "вопроса", "вопросов") %>
   </h2>
-  <h2 class="title-lg mb container-question text-center">
-    Хэштэги: <%= render_with_hashtags(@tags) %>
-  </h2>
+  <div class="title-lg container-question text-center">
+    <h2>Все хэштеги</h2>
+    <p>
+      <% @tags.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag) %>
+      <% end %>
+    </p>
+</div>
   <% @questions.each do |question| %>
     <% if question.hidden? %>
       <div class="container-question mb-sm hide">
