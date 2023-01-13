@@ -2,7 +2,7 @@
   <h2 class="title-lg mb container-question text-center">
     <%= @questions_with_tag.count %>
     <%= inclination(@questions_with_tag.count, "вопрос ", "вопроса", "вопросов") %>
-    c тэгом #<%= @tag.name %>
+    c тэгом <%= link_to @tag.name, tag_path(@tag.name) %>
   </h2>
 
   <% @questions_with_tag.each do |question| %>
