@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
   def index
     @question = Question.new
     @questions = Question.order("created_at DESC")
-    @tags = Tag.where_exists(:questions)
+    @tags = Tag.with_questions
   end
 
   def new
