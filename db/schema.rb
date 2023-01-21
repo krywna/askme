@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_10_133320) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_21_100038) do
   create_table "question_tags", force: :cascade do |t|
-    t.integer "question_id", null: false
-    t.integer "tag_id", null: false
+    t.integer "question_id"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_question_tags_on_question_id"
