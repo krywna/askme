@@ -11,7 +11,7 @@ class Question < ApplicationRecord
 
   def set_tags
     self.tags =
-      "#{@clean_text}".downcase.scan(Tag::REGEX).uniq.map do |hashtag|
+      "#{body} #{answer}".downcase.scan(Tag::REGEX).uniq.map do |hashtag|
         Tag.create_or_find_by(name: hashtag.downcase.delete("#"))
       end
   end
